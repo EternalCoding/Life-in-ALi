@@ -1,0 +1,45 @@
+						Git     Master 
+							        "This is just a starting!" --EternalCoding  7/14/2014 in ALi(SHA)
+							                    
+1. git overview
+   git 代码仓库是一个分布式版本控制系统
+   其基本工作模式包括3个：
+         Working  tree      →      Index      →      Git code-depot
+           coding             临时存储区域,即     代码仓库,储存修改好的
+	   		      快照(索引)区。      最终提交的版本。
+ 
+2. 如何随时快速搭建自己的git仓库？
+   在自己指定的工作目录下： ① 配置git仓库必要信息：$ git config --global user.name "username"
+						   $ git config --global user.email "useremali"
+					           $ git config --global core.editor vim
+						   $ git config --list //查看配置后的信息
+			    ② 产生自己git仓库的私钥和公钥；
+						   $ ssh -keygen       // 会产生id_rsa:私钥文件 和 id_rsa.pub:公钥文件
+		            ③ 创建和初始化git目录：$ git init --bare
+						   $ git init
+3. 常用git命令解析.
+   ① add 命令
+     $ git add . : 将当前目录下全部文件通过当前branch add到快照区
+     $ git add filename : 将指定文件通过当前branch add到快照区	
+   ② commit 命令
+     $ git commit -m "版本和修改信息": 将当前快照区上所有的文件通过当前分支提交到本地git仓库中
+   ③ branch 命令
+     $ git branch [arguments]:  
+	  $ git branch    : 查看显示当前工作目录下所有分支(本地分支)
+     	  $ git branch -a : 查看显示本地和remote上所有分支
+	  $ git branch -r : 查看显示remote上所有分支 
+     $ git branch branchname : 在当前工作目录下创建一个新的分支
+     $ git branch -D branchname : 删除指定的未merge的分支
+     $ git branch -d branchname : 删除指定的merge过的分支      	
+   ④ checkout 命令
+     $ git checkout branchname : 将工作分支由当前分支转换到指定分支
+       注：如果切换的目的分支在本地存在，则工作状态转入这个本地分支；
+	   如果切换的目的分支在本地不存在，而在Rmote存在，则会新建这个分支，并转换工作状态；
+	   如果两端都不存在，则会提示切换分支部存在。
+   ⑤ git push : 将当前分支下的最新工作状态push到中心服务器上，如果；
+		中心服务器上存在当前分支，则直接push即可更新；
+		中心服务器不存在当前分支，若将当前分支作为remote's master分支，则：$git push origin 当前分支名:master
+					  若将当前分支作为remote's 同名分支，  则：$git push origin 当前分支名
+   ⑥ git pull : 更新当前分支的工作状态，所以在更新前必须确保中心服务器上是否有同名的当前分支；
+		若有，则：$git pull 
+		若无，则：$git pull origin 分支名 
