@@ -1,0 +1,78 @@
+linux 常用命令
+./ 当前目录
+../ 当前目录的上一级目录
+- 上一次目录
+~ 用户目录
+ls -a (ls -all): 显示当前目录下全部文件，包括隐藏文件
+ls -t (ls -time): 按文件生成时间先后显示当前目录下可非隐藏属性的文件
+ls -l :显示全部非隐藏属性的文件权限
+cat	: 
+	cat a.txt : 显示文件a.txt中全部内容
+	cat > b.txt : 在当前目录下创建一个新文件b.txt(b.txt在当前目录下不能存在)
+	cat a.txt b.txt 〉c.txt : 将 a.txt 和 b.txt文件中全部内容复制到新文件 c.txt中(在a文件末尾处换行)
+echo	:	echo "加入内容" >> 指定的文件目录 ： 将"加入内容"作为新的一行添加到指定文件中
+touch	:	touch filename :创建一个filename 文件
+		touch -c filename 
+		修改文件的创建时间，参数选择和用法参考man  touch
+grep	:	grep 查询内容 files ：按行查询。
+chmod	:	chmod 属性值 file 	文件属性解析：
+			     		---------- ：1-10 位；第一位与属性无关，2-10分别为：user group others
+				             每个类型占据3位，依次是: rwx: 可读，可写，可执行。
+chown	:	chown -R sco /home/linux/src  使用户sco成为/home/linux/src下所有文件的新owner	
+chgrp	:	chgrp -R sco /home/linux/src  使用户sco成为/home/linux/src下所有文件的新grp
+du -sh  :
+		du -sh ./  显示当前目录大小
+		du -sh ./* 显示当前目录下所有子目录和文件的大小
+df	:	查看系统当前所有挂载信息
+grep	:	grep [option] <pattern>  <files>
+		常用参数: grep -i  <pattren> files  	: 在files中找出含有pattern的行且不分大小写
+			  grep -ri <pattern> files/目录 ：在files中或者目录及所有子目录下文件中找出含有pattern的行且区分大小写
+tar	:	压缩：  tar -[主选项+辅选项]  打包后的文件名  打包文件(可多个)
+			主选项：c (creat)
+			辅选项：v  显示压缩过程中压缩的文件名
+				f  给压缩文件命名参数
+				z  gzip  是否在tar基础上采用gizp压缩格式 若采用，则压缩文件后缀名为：xxx.tar.gz /xxx.tgz
+				j  bzip2 是否在tar基础上采用bzip2压缩格式，若采用，则压缩文件后缀名为：xxx.tar.bz2
+			tar -cvf ali.tar ali.*
+			tar -cvf ali.tar ./*
+			tar -zcvf ali.tgz ali.*
+			tar -jcvf ali.tar.bz2 ali.* 
+		解压：  tar -[主选项+辅选项]  解压文件
+			主选项：x (extract)
+			辅选项：v  显示解压过程中各文件名
+				f  给解压文件命名参数
+				z  gzip  解压具有gzip格式的文件
+				j  bzip2 解压具有bzip格式的文件
+			tar -xvf ali.tar
+			tar -zxvf ali.tar.gz /ali.tgz
+			tar -jxvf ali.tar.bz2
+find	:	在某个目录下按文件名查找文件 ： find 目录(当前目录则省略) -name 条件
+sort	:	sort <file>     将file中的所有行安行首字母的顺序排序的结果显示出来
+		sort -r(reverse) <file>  将file中的所有行安行首字母的逆序排序的结果显示出来
+		sort -ru(reverse unique) <file> 将file中的所有行安行首字母的逆序排序且去除重复行的结果显示出来		
+sed	:	sed -e 's/abc(被替换字符串)/def(替换字符串)'  
+		sed 's/^[ \t]*//' testfile will remove any 制表符 or 空格 at the beginning of a line
+standard output :	标准输出能够通过 >  输出到一个指定的文件
+			标准输出能够通过 >> 附加到到一个存在文件中
+进程后台执行：在命令行最后加上 &
+jobs	: 返回后台执行的任务列表
+fg	: 将最后的一个后台执行程序转为前台执行
+fg %<n>	: 将第nth位置的后台执行程序转为前台执行
+[Crtl] z: 将当前前台执行的程序转为后台执行
+eg:	top
+	[ctrl] z   : top程序转为后台执行
+	jobs 	     查看正在后台执行的程序
+	fg /fg % 1 : top程序转为前台执行
+kill pids; kid -9(强制) pids ; kill -9(强制) -1(all) 
+Alias	: shell 命令缩减，大大简化，高效的你工作
+	alias cl='clear'  cl = clear
+~/.bashrc 文件用处：
+		   用户默认环境变量配置
+  		   用户命令行缩写
+		   prompt，greeting message
+history ：显示最近使用过的命令及序号
+          !! 召唤最近一次你使用过的一次命令
+	  ！num 按序号召唤命令
+	  ！abc 按首字母匹配召唤命令
+mkdir [-p] 目录1/目录2/目录3 ：如果没有-p : 则建立目录会报错，提示目录2/目录3不存在
+			       如果有  -p : 则会递归的建立这个目录，不会报错
