@@ -1,0 +1,18 @@
+			How to gdb program between HOST & TARGET BOARD
+1. cd to ur application program directory, type the following command;
+   $gdbserer :[port_name] application_program_name
+   note: (1) We start gdb server in our target board and use one serial prot name to listen the gdb command from HOST
+         (2) After having typed the above command, namely starting the target board gdb server and then just waiting for the command from 	 the HOST. 
+2. back to our host, cd to the host's directory containing the symboled program to be gdb;
+3. in the current directory which containing the target program, call our gdb tool(type the gdb tool directory in the current command          line), adding the program name, then pressing ENTER to start GDB, display:
+   (gdb) 
+4. configue the gdb and connect to remote gdb server
+   configue:
+   (gdb)set solib-absolute-prefix /home/lorin/work/rabbit/images/fs.install
+   (gdb)set solib-search-path /home/lorin/work/rabbit/images/fs.install/lib
+   (gdb)set solib-search-path  /home/lorin/work/rabbit/images/fs.install/opt/alisdk/lib
+   connecting:
+   (gdb)target remote 10.41.155.74:2345
+5. starting debug
+   (1) set one breakpoint first
+   (2) (gdb)c 
