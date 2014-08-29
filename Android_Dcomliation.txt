@@ -1,0 +1,24 @@
+	******************************************************************	
+	**     		    Android_Decompilation                       **
+	******************************************************************
+
+通过dex2jar和jd我们可以反编译apk中的dex，可以比较完美的查看java源文件；
+通过apktool可以反编译apk中的xml,res等资源文件；
+然后通过apk-sign签名，可以制作成修改版的可发布apk文件。
+
+dex2jar反编译dex文件：
+1.下载文件：jd-gui.rar，dex2jar-0.0.9.15.rar
+2.把apk文件后缀名改为.zip，然后解压缩其中的class.dex文件，它是java文件编译再通过dx工具打包成的
+3.把class.dex拷贝到dex2jar.bat所在目录，运行dex2jar.bat class.dex，生成classes_dex2jar.jar
+4.运行jd-gui工具(绿色无须安装)，打开上面生成的jar文件，即可看到源代码
+5.jd-gui支持java代码导出，选项File-Save Source为单文件导出，选项File-Save All Sources为批量导出
+
+apktool反编译xml,res等资源文件：
+1.下载文件：apktool.rar
+2.apktool d XXX.apk ABC 反编译XXX.apk到文件夹ABC
+3.apktool b ABC 从反编译后的文件夹ABC重建APK，输出到ABC\dist\out.apk
+
+apk-sign签名apk文件：
+1.下载文件：APK-sign.rar，解压到APK-sign文件夹
+2.将XXX.apk文件解压到XXX文件夹，然后将XXX直接拖到APK-sign文件中的sign_pack.bat批处理文件上以执行，弹出cmd执行窗口，等待执行完即可
+3.生成新文件夹XXX_signed中的apk文件即为已签名
